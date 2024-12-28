@@ -28,26 +28,5 @@
 
 <h1>Hello</h1>
 
-<th:block th:if="${session.sessionToken != null}">
-<form th:action="@{/game/create}" method="post">
-
-    <button type="submit">Create Game</button>
-</form>
-
-<form th:action="@{/game/enter}" method="post">
-<input type="number" name="gameId">
-
-    <button type="submit">Enter Game</button>
-</form>
-
-    <form th:if="${gameId != null}" th:action="@{/game/lobby}" method="get">
-        <input type="hidden" name="gameId" th:value="${gameId}">
-
-        <button type="submit">My Game</button>
-    </form>
-
-</th:block>
-
-
 </body>
 </html>
