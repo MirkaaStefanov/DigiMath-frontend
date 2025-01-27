@@ -5,6 +5,7 @@ import com.example.DigiMath_frontend.dtos.AuthenticationResponse;
 import com.example.DigiMath_frontend.dtos.UserDTO;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +25,11 @@ public interface UserClient {
     @GetMapping("/{id}")
     UserDTO getUserById(@PathVariable(name = "id") Long id, @RequestHeader("Authorization") String auth);
 
-    @PostMapping
-    UserDTO createUser(@Valid @RequestBody UserDTO user, @RequestHeader("Authorization") String auth);
+    @PostMapping("/register")
+    UserDTO createUser(@Valid @RequestBody UserDTO user);
 
-    @PutMapping("/authenticated/{id}")
+
+        @PutMapping("/authenticated/{id}")
     AuthenticationResponse updateAuthenticatedUser(@PathVariable("id") Long id, @Valid @RequestBody UserDTO userDTO, @RequestHeader("Authorization") String auth);
 
     @PutMapping("/{id}")

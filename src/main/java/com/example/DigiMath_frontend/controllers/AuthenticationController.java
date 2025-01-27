@@ -6,6 +6,7 @@ import com.example.DigiMath_frontend.clients.UserClient;
 import com.example.DigiMath_frontend.dtos.AuthenticationRequest;
 import com.example.DigiMath_frontend.dtos.AuthenticationResponse;
 import com.example.DigiMath_frontend.dtos.UserDTO;
+import com.example.DigiMath_frontend.models.User;
 import com.example.DigiMath_frontend.session.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class AuthenticationController {
 
     @GetMapping("/login")
     public String login(Model model, AuthenticationRequest authenticationRequest) {
+        model.addAttribute("user", new UserDTO());
         return "login";
     }
 

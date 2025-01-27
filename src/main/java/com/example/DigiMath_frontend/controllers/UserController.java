@@ -43,32 +43,26 @@ public class UserController {
         return "User/show";
     }
 
-    @GetMapping("/create")
-    String createUser(Model model, HttpServletRequest request, @ModelAttribute("emailAlreadyExists") String message) {
-        String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
-
-
-
-        User user = new User();
-
-        model.addAttribute("user", user);
-        model.addAttribute("emailAlreadyExists", message);
-        return "User/create";
-    }
+//    @GetMapping("/create")
+//    String createUser(Model model, HttpServletRequest request, @ModelAttribute("emailAlreadyExists") String message) {
+//        String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
+//        User user = new User();
+//        model.addAttribute("user", user);
+//        model.addAttribute("emailAlreadyExists", message);
+//        return "User/create";
+//    }
 
     @PostMapping("/submit")
     public ModelAndView submitUser(@ModelAttribute("user") UserDTO user, HttpServletRequest request, Model model) {
-        String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
-
         try {
-            UserDTO createdUser = userClient.createUser(user, token);
+           userClient.createUser(user);
 
         } catch (Exception ex) {
             model.addAttribute("user", user);
             model.addAttribute("emailAlreadyExists", "Потребител с този имейл вече съществува!");
-            return new ModelAndView("User/create");
+            return new ModelAndView("login");
         }
-        return new ModelAndView(REDIRECTTXT);
+        return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/editUser/{id}")

@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,4 +25,7 @@ public class UserDTO {
     @Email
     private String email;
     private Role role;
+    private int currentStreak = 0;
+    private int longestStreak = 0;
+    private LocalDate dateLastEntered;
 }
