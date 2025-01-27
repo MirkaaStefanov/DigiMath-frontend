@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'PixelFont';
+    src: url('/fonts/pixel-font.otf') format('opentype'); /* Path to your font */
+}
+
+/* Set the custom font on the body */
+body {
+    font-family: 'PixelFont', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;  /* Light background color */
+    color: #333;  /* Text color */
+    font-size: 16px;
+    line-height: 1.5;
+}

@@ -1,72 +1,203 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <!--    LINKS  -->
-    <!--    <th:block th:insert="~{fragments/links}"></th:block>-->
-    <title> Lukeria меню </title>
-    <link rel="icon" type="image/x-icon" href="img/photos/noImage.png">
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/myStyle.css">
+    <title>Login</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: PixelFont, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f9fc;
 
+        }
+
+        .card {
+            display: flex;
+            width: 100%;
+            max-height: 1000px;
+            max-width: 450px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #29abe2;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .card h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .form-control {
+            width: 425px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0056b3;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #003f7f;
+        }
+
+        .text-muted {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .text-muted:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            height: 50px;
+            top: 5px;
+            right: 5px;
+            background-color: #004b6b;
+            color: #29abe2;
+            border: 2px solid #29abe2;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        /* Hide the signup form by default */
+        .signup {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 80%;
+                max-height: 100%;
+                padding: 20px;
+            }
+
+            .card h2 {
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+            .form-label {
+                font-size: 16px;
+            }
+
+            .form-control {
+                width: 300px;
+                max-width: none;
+                font-size: 14px;
+                padding-right: 10px;
+            }
+
+            .btn-primary {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
 <body>
 
-<div class="main">
-    <nav class="navbar navbar-expand navbar-light navbar-bg">
-        <a class="sidebar-toggle js-sidebar-toggle">
-            <i class="hamburger align-self-center"></i>
-        </a>
-    </nav>
-    <main class="d-flex w-100">
-        <div class="container d-flex flex-column">
-            <div class="row vh-100">
-                <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
-                    <div class="d-table-cell align-middle">
-                        <div class="text-center mt-4">
-                            <p class="lead" style="font-size: 24px;">
-                                Впишете се, за да достъпите акаунта си!
-                            </p>
-                        </div>
+<div class="card">
+    <!-- Toggle Button -->
+    <button class="toggle-btn" onclick="toggleForm()">Регистрирай се</button>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="m-sm-3">
-                                    <form th:action="@{/login}" method="post">
-                                        <div class="mb-3">
-                                            <label class="form-label" style="font-size: 18px;">Имейл</label>
-                                            <input class="form-control form-control-lg" type="email" name="email"
-                                                   placeholder="Въведете имейла си"
-                                                   style="height: 50px; font-size: 16px;"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" style="font-size: 18px;">Парола</label>
-                                            <input class="form-control form-control-lg" type="password"
-                                                   name="password" placeholder="Въведете паролата си"
-                                                   style="height: 50px; font-size: 16px;"/>
-                                            <div th:if="${param.error}" class="text-danger"
-                                                 style="margin-top: 15px;">
-                                                <p th:text="${param.error}"></p>
-                                            </div>
-                                            <div th:if="${param.message}" class="text-success"
-                                                 style="margin-top: 15px;">
-                                                <p th:text="${param.message}"></p>
-                                            </div>
-                                            <input type="submit"
-                                                   class="btn btn-block btn-primary text-white py-3 px-5"
-                                                   value="Влез">
-                                        </div>
-                                        <div class="text-center mt-3">
-                                            <a th:href="@{/user/forgot-password}" class="text-muted"
-                                               style="font-size: 16px;">Забравена парола?</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Login Form -->
+    <div class="login">
+        <h2>Вход в акаунта</h2>
+        <form action="/login" method="post">
+            <label class="form-label" for="email">Имейл адрус</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="Въведете имейл адрес" required>
+
+            <label class="form-label" for="password">Парола</label>
+            <input class="form-control" type="password" id="password" name="password" placeholder="Въведете парола" required>
+
+            <input type="submit" class="btn-primary" style="margin-top: 10px;" value="Влез">
+
+            <div class="text-muted" style="margin-top: 15px; margin-bottom: 0px;">
+                <a href="/user/forgot-password">Забравена парола?</a>
             </div>
-        </div>
-    </main>
+        </form>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="signup">
+        <h2>Регистрация</h2>
+        <form action="/signup" method="post">
+            <label class="form-label" for="email">Имейл</label>
+            <input class="form-control" type="email" id="Enteremail" name="email" placeholder="Въведете имейл" required>
+            <label class="form-label" for="name">Име</label>
+            <input class="form-control" type="name" id="name" name="name" placeholder="Въведете име" required>
+            <label class="form-label" for="surname">Фамилия</label>
+            <input class="form-control" type="name" id="surname" name="surname" placeholder="Въведете фамилия" required>
+            <label class="form-label" for="username">Потребителско име</label>
+            <input class="form-control" type="username" id="username" name="username" placeholder="Въведете потребителско име" required>
+            <label class="form-label" for="password">Парола</label>
+            <input class="form-control" type="password" id="Enterpass" name="password" placeholder="Въведете парола" required>
+
+            <input type="submit" class="btn-primary" value="Регистрирай се">
+        </form>
+    </div>
+
 </div>
-</div>
+
+<script>
+    function toggleForm() {
+        var loginForm = document.querySelector('.login');
+        var signupForm = document.querySelector('.signup');
+        var toggleBtn = document.querySelector('.toggle-btn');
+
+        if (loginForm.style.display === "none") {
+            loginForm.style.display = "block";
+            signupForm.style.display = "none";
+            toggleBtn.textContent = "Регистрирай се";
+        } else {
+            loginForm.style.display = "none";
+            signupForm.style.display = "block";
+            toggleBtn.textContent = "Влез в акаунт";
+        }
+    }
+</script>
+
 </body>
 </html>
