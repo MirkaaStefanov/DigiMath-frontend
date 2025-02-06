@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:font-family="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +64,7 @@
             font-size: 18px;
             border: none;
             border-radius: 5px;
-            background-color: #0056b3;
+            background-color: #03609e;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -89,7 +89,7 @@
             height: 50px;
             top: 5px;
             right: 5px;
-            background-color: #004b6b;
+            background-color: #003f7f;
             color: #29abe2;
             border: 2px solid #29abe2;
             padding: 5px 10px;
@@ -146,16 +146,66 @@
     <div class="login">
         <h2>Вход в акаунта</h2>
         <form action="/login" method="post">
-            <label class="form-label" for="email">Имейл адрус</label>
-            <input class="form-control" type="email" id="email" name="email" placeholder="Въведете имейл адрес" required>
+            <label class="form-label" for="email">Имейл адрeс</label>
+            <input class="form-control" type="email" id="email" style="margin-left: 1px; margin-right: 1px; "name="email" placeholder="Въведете имейл адрес" required>
 
             <label class="form-label" for="password">Парола</label>
-            <input class="form-control" type="password" id="password" name="password" placeholder="Въведете парола" required>
+            <div style="position: relative; width: 100%; max-width: 448px;">
+                <!-- The input field with padding-right for space to fit the eye icon -->
+                <input class="form-control"
+                       type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Въведете парола"
+                       required
+                       style="padding-right: 10px; width: 100%;" />
+                <!-- The eye icon inside the input, positioned absolutely -->
+                <img id="togglePassword"
+                     src="/images/eye-close-svgrepo-com.svg"
+                     alt="Toggle Password Visibility"
+                     style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;" />
+            </div>
+            <style>
+    /* Default styling for both */
+    .form-control {
+        width: 100%; /* Take full width */
+        padding-right: 10px;
+        box-sizing: border-box;
+    }
 
-            <input type="submit" class="btn-primary" style="margin-top: 10px;" value="Влез">
+    /* For Web */
+    @media (min-width: 480px) {
+        #password {
+            margin-left: 3px;
+            margin-right: 11px;
+        }
+    }
+
+    /* For mobile screens */
+    @media (max-width: 480px) {
+        .form-control {
+            width: 100%;
+            max-width: 100%;
+            padding-right: 35px;
+            font-size: 14px;
+        }
+
+        #togglePassword {
+            width: 18px;
+        }
+
+        #password {
+            margin-left: 2px;
+            margin-right: 11px;
+        }
+    }
+</style>
+
+
+            <input type="submit" class="btn-primary" style="margin-top: 10px; font-family: PixelFont, sans-serif;" value="Влез">
 
             <div class="text-muted" style="margin-top: 15px; margin-bottom: 0px;">
-                <a href="/user/forgot-password">Забравена парола?</a>
+                <a href="/user/forgot-password" style="font-family: Ariel, sans-serif; color: #fff8f8">Забравена парола?</a>
             </div>
         </form>
     </div>
@@ -167,8 +217,7 @@
             <label class="form-label" for="email">Имейл</label>
             <input class="form-control" type="email" id="Enteremail" name="email" placeholder="Въведете имейл" required >
             <div th:if="${emailAlreadyExists}"
-                 class="text-danger" style="margin-top: 15px;"
-                 th:text="${emailAlreadyExists}"></div>
+                 class="text-danger" style="margin-top: 15px;" th:text="${emailAlreadyExists}"></div>
             <label class="form-label" for="name">Име</label>
             <input class="form-control" type="name" id="name" name="firstname" placeholder="Въведете име" required>
             <label class="form-label" for="surname">Фамилия</label>
@@ -178,7 +227,7 @@
             <label class="form-label" for="password">Парола</label>
             <input class="form-control" type="password" id="Enterpass" name="password" placeholder="Въведете парола" required>
 
-            <input type="submit" class="btn-primary" value="Регистрирай се">
+            <input type="submit" class="btn-primary" style="font-family: PixelFont, sans-serif;" value="Регистрирай се">
         </form>
     </div>
 
@@ -200,6 +249,29 @@
             toggleBtn.textContent = "Влез в акаунт";
         }
     }
+
+
+
+    const togglePassword = document.querySelector('#togglePassword');
+    const passwordField = document.querySelector('#password');
+
+
+    togglePassword.addEventListener('click', function() {
+
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+
+
+        passwordField.setAttribute('type', type);
+
+
+        if (passwordField.type === 'password') {
+            togglePassword.src = '/images/eye-close-svgrepo-com.svg';
+        } else {
+            togglePassword.src = '/images/eye-open-svgrepo-com.svg';
+        }
+    });
+</script>
+
 </script>
 
 </body>
