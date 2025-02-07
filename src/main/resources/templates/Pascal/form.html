@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Pascal</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/pascal/submit}" th:object="${pascal}" method="post">
+  <div>
+    <label for="first">First:</label>
+    <input type="text" id="first" th:field="*{first}" />
+  </div>
+
+  <div>
+    <label for="second">Second:</label>
+    <input type="text" id="second" th:field="*{second}" />
+  </div>
+
+  <div>
+    <label for="coefficient">Coefficient:</label>
+    <input type="number" id="coefficient" th:field="*{coefficient}" />
+  </div>
+
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+</body>
+</html>
