@@ -17,7 +17,9 @@
             background-color: #f7f9fc;
 
         }
-
+            body.show-signup {
+        margin-top: 100px; /* Adjust the space for header on larger screens */
+    }
         .card {
             display: flex;
             width: 100%;
@@ -98,15 +100,19 @@
             font-size: 14px;
             font-weight: bold;
         }
-        /* Hide the signup form by default */
+
         .signup {
             display: none;
         }
 
         @media (max-width: 480px) {
+         body.show-signup {
+            margin-top: 90px;
+             }
+
             .card {
                 width: 80%;
-                max-height: 100%;
+                max-height: 110%;
                 padding: 20px;
             }
 
@@ -134,6 +140,7 @@
                 font-size: 20px;
             }
         }
+
     </style>
 </head>
 <body>
@@ -201,7 +208,6 @@
     }
 </style>
 
-
             <input type="submit" class="btn-primary" style="margin-top: 10px; font-family: PixelFont, sans-serif;" value="Влез">
 
             <div class="text-muted" style="margin-top: 15px; margin-bottom: 0px;">
@@ -224,55 +230,110 @@
             <input class="form-control" type="name" id="surname" name="lastname" placeholder="Въведете фамилия" required>
             <label class="form-label" for="username">Потребителско име</label>
             <input class="form-control" type="username" id="username" name="username" placeholder="Въведете потребителско име" required>
-            <label class="form-label" for="password">Парола</label>
-            <input class="form-control" type="password" id="Enterpass" name="password" placeholder="Въведете парола" required>
+                <label class="form-label" for="password">Парола</label>
+                <div style="position: relative; width: 100%; max-width: 448px;">
+                    <input class="form-control"
+                           type="password"
+                           id="Enterpass"
+                           name="password"
+                           placeholder="Въведете парола"
+                           required
+                           style="padding-right: 10px; width: 100%;" />
+                    <img id="togglePassword1"
+                         src="/images/eye-close-svgrepo-com.svg"
+                         alt="Toggle Password Visibility"
+                         style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;" />
+                </div>
 
-            <input type="submit" class="btn-primary" style="font-family: PixelFont, sans-serif;" value="Регистрирай се">
-        </form>
+                <label class="form-label" for="password">Въведете повторно паролата:</label>
+                <div style="position: relative; width: 100%; max-width: 448px;">
+                    <input class="form-control"
+                           type="password"
+                           id="Checkpass"
+                           placeholder="Въведете повторна парола"
+                           required
+                           style="padding-right: 10px; width: 100%;" />
+                    <img id="togglePassword2"
+                         src="/images/eye-close-svgrepo-com.svg"
+                         alt="Toggle Password Visibility"
+                         style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;" />
+                </div>
+
+                <input type="submit" class="btn-primary" style="font-family: PixelFont, sans-serif;" value="Регистрирай се">
+            </form>
+
+            <style>
+    /* Default styling for both */
+    .form-control {
+        width: 100%;
+        padding-right: 10px;
+        box-sizing: border-box;
+    }
+
+    /* For Web */
+    @media (min-width: 480px) {
+        .form-control {
+            margin-left: 3px;
+            margin-right: 11px;
+        }
+    }
+
+    /* For mobile screens */
+    @media (max-width: 480px) {
+        .form-control {
+            max-width: 100%;
+            padding-right: 35px;
+            font-size: 14px;
+        }
+
+        #togglePassword1, #togglePassword2 {
+            width: 18px;
+        }
+    }
+</style>
     </div>
 
 </div>
-
 <script>
+    // Toggle visibility of the password field
+    const togglePasswordButtons = document.querySelectorAll('[id^="togglePassword"]');
+
+    togglePasswordButtons.forEach((toggleButton) => {
+        toggleButton.addEventListener('click', function () {
+            const passwordField = toggleButton.parentElement.querySelector('input[type="password"], input[type="text"]');
+
+            if (passwordField) {
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+
+                toggleButton.src = type === 'password'
+                    ? '/images/eye-close-svgrepo-com.svg'
+                    : '/images/eye-open-svgrepo-com.svg';
+            }
+        });
+    });
+
+    // Toggle between Login and Sign-Up forms
     function toggleForm() {
         var loginForm = document.querySelector('.login');
         var signupForm = document.querySelector('.signup');
         var toggleBtn = document.querySelector('.toggle-btn');
+        var body = document.body;
 
         if (loginForm.style.display === "none") {
             loginForm.style.display = "block";
             signupForm.style.display = "none";
             toggleBtn.textContent = "Регистрирай се";
+            body.classList.remove('show-signup');
+            document.title = "Login";
         } else {
             loginForm.style.display = "none";
             signupForm.style.display = "block";
             toggleBtn.textContent = "Влез в акаунт";
+            body.classList.add('show-signup');
+            document.title = "Sign Up";
         }
     }
-
-
-
-    const togglePassword = document.querySelector('#togglePassword');
-    const passwordField = document.querySelector('#password');
-
-
-    togglePassword.addEventListener('click', function() {
-
-        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-
-
-        passwordField.setAttribute('type', type);
-
-
-        if (passwordField.type === 'password') {
-            togglePassword.src = '/images/eye-close-svgrepo-com.svg';
-        } else {
-            togglePassword.src = '/images/eye-open-svgrepo-com.svg';
-        }
-    });
 </script>
-
-</script>
-
 </body>
 </html>
