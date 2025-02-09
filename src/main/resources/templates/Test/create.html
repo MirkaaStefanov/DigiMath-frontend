@@ -42,7 +42,7 @@
 </head>
 <body>
 <h1>Create a New Test</h1>
-<form action="#" th:action="@{/submit}" th:object="${test}" method="post">
+<form action="#" th:action="@{/test/submit}" th:object="${test}" method="post">
     <!-- Title Input -->
     <label for="title">Test Title:</label>
     <input type="text" id="title" th:field="*{title}" placeholder="Enter test title" required>
