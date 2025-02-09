@@ -43,7 +43,7 @@ public class TestController {
     }
 
     @PostMapping("/submit")
-    public ModelAndView submitTest(@ModelAttribute(name = "test") TestDTO testDTO, HttpServletRequest request) {
+    public ModelAndView submitTest(@ModelAttribute(name = "testDTO") TestDTO testDTO, HttpServletRequest request) {
         String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
         testClient.createTest(testDTO, token);
         return new ModelAndView("redirect:/test/all-tests");
