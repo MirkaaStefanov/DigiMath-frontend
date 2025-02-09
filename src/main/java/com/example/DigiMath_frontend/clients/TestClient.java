@@ -13,7 +13,7 @@ import java.util.List;
 
 @FeignClient(name = "digiMath-test", url = "${backend.base-url}/test")
 public interface TestClient {
-    @GetMapping
+    @GetMapping("/all")
     List<TestDTO> getAllTests(@RequestHeader("Authorization") String auth);
 
     @PostMapping("/create")
