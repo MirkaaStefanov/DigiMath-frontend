@@ -50,6 +50,11 @@
                 <button>Enter Test</button>
             </a>
         </td>
+        <td>
+            <a th:href="@{/question/question-form/{id}(id=${test.id})}">
+                <button>Add question</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

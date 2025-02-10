@@ -2,11 +2,15 @@ package com.example.DigiMath_frontend.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class AnswerDTO {
 
     private Long id;
@@ -15,5 +19,5 @@ public class AnswerDTO {
 
     private String text;
 
-    private boolean isCorrect;
+    private Boolean isCorrect;
 }

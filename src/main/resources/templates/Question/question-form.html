@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Question</title>
+  <script>
+    function updateForm() {
+        let questionType = document.getElementById("questionType").value;
+
+        // Show/Hide sections
+        document.getElementById("trueFalseSection").style.display = questionType === 'TRUEFALSE' ? 'block' : 'none';
+        document.getElementById("abcdSection").style.display = questionType === 'ABCD' ? 'block' : 'none';
+        document.getElementById("openSection").style.display = questionType === 'OPEN' ? 'block' : 'none';
+
+        // Enable relevant fields and disable others
+        let allInputs = document.querySelectorAll("#abcdSection input, #openSection input");
+        allInputs.forEach(input => input.disabled = true); // Disable all extra inputs
+
+        if (questionType === 'ABCD') {
+            document.querySelectorAll("#abcdSection input").forEach(input => input.disabled = false);
+        } else if (questionType === 'OPEN') {
+            document.querySelectorAll("#openSection input").forEach(input => input.disabled = false);
+        }
+    }
+
+    function prepareTrueFalseAnswers() {
+        let trueSelected = document.getElementById("trueOption").checked;
+        let falseSelected = document.getElementById("falseOption").checked;
+
+        // Fill hidden fields for True/False only when relevant
+        document.getElementById("trueAnswerHidden").value = "True";
+        document.getElementById("falseAnswerHidden").value = "False";
+        document.getElementById("trueIsCorrect").value = trueSelected ? "true" : "false";
+        document.getElementById("falseIsCorrect").value = falseSelected ? "true" : "false";
+
+        // Disable unnecessary inputs before submit
+        updateForm();
+    }
+  </script>
+</head>
+<body>
+
+<h2>Question Form</h2>
+<form th:action="@{/question/question-form}" method="post" th:object="${question}" onsubmit="prepareTrueFalseAnswers()">
+  <input type="hidden" name="testId" th:value="${testId}">
+
+  <label>Question Text:</label>
+  <input type="text" th:field="*{text}" required />
+
+  <label>Question Type:</label>
+  <select id="questionType" th:field="*{questionType}" onchange="updateForm()">
+    <option value="TRUEFALSE">True/False</option>
+    <option value="ABCD">Multiple Choice (A, B, C, D)</option>
+    <option value="OPEN">Open Question</option>
+  </select>
+
+  <!-- True/False Section -->
+  <div id="trueFalseSection" style="display:none;">
+    <label>Correct Answer:</label>
+
+    <!-- True option -->
+    <input type="radio" id="trueOption" name="correctAnswer" value="true" />
+    <label for="trueOption">True</label>
+
+    <!-- False option -->
+    <input type="radio" id="falseOption" name="correctAnswer" value="false" />
+    <label for="falseOption">False</label>
+
+    <!-- Hidden fields to be filled on form submit -->
+    <input type="hidden" id="trueAnswerHidden" th:field="*{answers[0].text}" />
+    <input type="hidden" id="falseAnswerHidden" th:field="*{answers[1].text}" />
+    <input type="hidden" id="trueIsCorrect" th:field="*{answers[0].isCorrect}" />
+    <input type="hidden" id="falseIsCorrect" th:field="*{answers[1].isCorrect}" />
+  </div>
+
+  <!-- ABCD Section -->
+  <div id="abcdSection" style="display:none;">
+    <label>Multiple Choice Answers:</label>
+    <div th:each="answer, stat : *{answers}">
+      <label>Answer:</label>
+      <input type="text" th:field="*{answers[__${stat.index}__].text}" required />
+      <label>Correct?</label>
+      <input type="checkbox" th:field="*{answers[__${stat.index}__].isCorrect}" />
+    </div>
+  </div>
+
+  <!-- Open Question Section -->
+  <div id="openSection" style="display:none;">
+    <label>Correct Answer:</label>
+    <input type="text" th:field="*{answers[0].text}" required />
+    <input type="hidden" th:field="*{answers[0].isCorrect}" th:value="true" />
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  updateForm(); // Ensure correct display on page load
+</script>
+
+</body>
+</html>
