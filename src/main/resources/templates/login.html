@@ -219,7 +219,7 @@
     <!-- Sign Up Form -->
     <div class="signup">
         <h2>Регистрация</h2>
-        <form th:action="@{/user/submit}" method="post" th:object="${user}">
+        <form th:action="@{/user/submit}" method="post" th:object="${user}" onsubmit="return validatePasswords();">
             <label class="form-label" for="email">Имейл</label>
             <input class="form-control" type="email" id="Enteremail" name="email" placeholder="Въведете имейл" required >
             <div th:if="${emailAlreadyExists}"
@@ -258,7 +258,7 @@
                          alt="Toggle Password Visibility"
                          style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;" />
                 </div>
-
+                <span id="error-message"style="color: #bf003c; font-weight: bold; display: block; margin-top: 5px; font-family: Ariel, sans-serif;"> </span>
                 <input type="submit" class="btn-primary" style="font-family: PixelFont, sans-serif;" value="Регистрирай се">
             </form>
 
@@ -334,6 +334,23 @@
             document.title = "Sign Up";
         }
     }
+
+     //Password check
+    function validatePasswords() {
+   const enterPass = document.getElementById("Enterpass").value;
+   const checkPass = document.getElementById("Checkpass").value;
+   const errorMessage = document.getElementById("error-message");
+
+   if (enterPass !== checkPass) {
+       errorMessage.textContent = "Паролите не съвпадат!";
+       return false; // Prevents form submission
+   } else {
+       errorMessage.textContent = "";
+   }
+
+   return true;
+}
+
 </script>
 </body>
 </html>
