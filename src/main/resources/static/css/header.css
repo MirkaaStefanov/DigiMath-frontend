@@ -1,0 +1,167 @@
+header {
+    background-color: #03609e;
+    color: white;
+    padding: 20px 40px; /* Bigger height */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+}
+
+header img {
+    width: 60px;
+    height: auto;
+}
+
+/* Hamburger icon (hidden by default) */
+header .hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Centered links */
+header .centered-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    height: 50%;
+}
+
+/* Right Links */
+header .right-nav {
+    display: flex;
+    gap: 15px;
+    margin-left: auto; /* Aligns the links to the right */
+    justify-content: flex-end;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+header nav a:hover {
+    color: #29abe2;
+}
+header .right-nav a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 15px;
+    position: relative;
+    z-index: 2;
+}
+
+header .right-nav a:hover {
+    color: #29abe2;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    /* Show hamburger icon on mobile */
+    header .hamburger {
+        display: block;
+    }
+
+
+    header nav {
+        display: none;
+        flex-direction: column;
+        background-color: #03609e;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+
+    header nav.active {
+        display: flex;
+    }
+
+    header nav a {
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+    }
+
+    header .centered-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        position: unset;
+        transform: unset;
+        text-align: center;
+    }
+
+    header .right-nav {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            width: 100%;
+            padding: 10px 20px;
+        }
+}
+
+/* Desktop */
+@media (min-width: 601px) {
+
+      header .right-nav {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        header .centered-links {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin: 0;
+                text-align: center;
+                width: 100%;
+            }
+
+
+            header .centered-links a {
+                background-color: #a6e0ac;
+                padding: 6px 12px;
+                margin: 0 10px;
+                border-radius: 5px;
+                text-decoration: none;
+                color: white;
+                font-size: 16px;
+                transition: background-color 0.3s;
+            }
+
+}
+
+
+
+
+

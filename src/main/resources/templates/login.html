@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/myStyle.css">
+    <link rel="stylesheet" href="/css/header.css">
     <title>Login</title>
     <style>
         /* General Styles */
@@ -14,7 +15,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f7f9fc;
+            background-color: #edfcef;
+            padding-top: 80px;
 
         }
             body.show-signup {
@@ -144,6 +146,25 @@
     </style>
 </head>
 <body>
+
+<header>
+    <!--смени с svg с бели граници-->
+    <img src="/images/logoDigiMath.png" alt="Logo" width="100px" height="100px">
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <nav id="headerNav">
+        <div class="centered-links">
+            <!--тобави им ментови бутони-like -->
+        <a href="/math">Полезно</a>
+        <a href="/test/show-all">Дигитални решения</a>  <!--не работи?-->
+        <a href="/contact">Игри</a>
+        <a href="/us">За нас</a>
+        </div>
+        <div class="right-nav">
+        <a href="/login">Влез</a> <!--това трябва да се промени на излез като сме влезли-->
+        <a href="/user-info">Профил</a>
+        </div>
+    </nav>
+</header>
 
 <div class="card">
     <!-- Toggle Button -->
@@ -349,6 +370,11 @@
    }
 
    return true;
+}
+    //Menu Hamburger
+    function toggleMenu() {
+    const headerNav = document.getElementById("headerNav");
+    headerNav.classList.toggle("active");
 }
 
 </script>
