@@ -144,27 +144,12 @@
         }
 
     </style>
-</head>
-<body>
 
-<header>
-    <!--смени с svg с бели граници-->
-    <img src="/images/logoDigiMath.png" alt="Logo" width="100px" height="100px">
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <nav id="headerNav">
-        <div class="centered-links">
-            <!--тобави им ментови бутони-like -->
-        <a href="/math">Полезно</a>
-        <a href="/test/show-all">Дигитални решения</a>  <!--не работи?-->
-        <a href="/contact">Игри</a>
-        <a href="/us">За нас</a>
-        </div>
-        <div class="right-nav">
-        <a href="/login">Влез</a> <!--това трябва да се промени на излез като сме влезли-->
-        <a href="/user-info">Профил</a>
-        </div>
-    </nav>
-</header>
+</head>
+
+<body onload="toggleFormOnLoad([[${showRegistrationForm}]])">
+
+<header th:insert="~{header}"></header>
 
 <div class="card">
     <!-- Toggle Button -->
@@ -175,7 +160,8 @@
         <h2>Вход в акаунта</h2>
         <form action="/login" method="post">
             <label class="form-label" for="email">Имейл адрeс</label>
-            <input class="form-control" type="email" id="email" style="margin-left: 1px; margin-right: 1px; "name="email" placeholder="Въведете имейл адрес" required>
+            <input class="form-control" type="email" id="email" style="margin-left: 1px; margin-right: 1px; "
+                   name="email" placeholder="Въведете имейл адрес" required>
 
             <label class="form-label" for="password">Парола</label>
             <div style="position: relative; width: 100%; max-width: 448px;">
@@ -186,53 +172,55 @@
                        name="password"
                        placeholder="Въведете парола"
                        required
-                       style="padding-right: 10px; width: 100%;" />
+                       style="padding-right: 10px; width: 100%;"/>
                 <!-- The eye icon inside the input, positioned absolutely -->
                 <img id="togglePassword"
                      src="/images/eye-close-svgrepo-com.svg"
                      alt="Toggle Password Visibility"
-                     style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;" />
+                     style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;"/>
             </div>
             <style>
-    /* Default styling for both */
-    .form-control {
-        width: 100%; /* Take full width */
-        padding-right: 10px;
-        box-sizing: border-box;
-    }
+                /* Default styling for both */
+                .form-control {
+                    width: 100%; /* Take full width */
+                    padding-right: 10px;
+                    box-sizing: border-box;
+                }
 
-    /* For Web */
-    @media (min-width: 480px) {
-        #password {
-            margin-left: 3px;
-            margin-right: 11px;
-        }
-    }
+                /* For Web */
+                @media (min-width: 480px) {
+                    #password {
+                        margin-left: 3px;
+                        margin-right: 11px;
+                    }
+                }
 
-    /* For mobile screens */
-    @media (max-width: 480px) {
-        .form-control {
-            width: 100%;
-            max-width: 100%;
-            padding-right: 35px;
-            font-size: 14px;
-        }
+                /* For mobile screens */
+                @media (max-width: 480px) {
+                    .form-control {
+                        width: 100%;
+                        max-width: 100%;
+                        padding-right: 35px;
+                        font-size: 14px;
+                    }
 
-        #togglePassword {
-            width: 18px;
-        }
+                    #togglePassword {
+                        width: 18px;
+                    }
 
-        #password {
-            margin-left: 2px;
-            margin-right: 11px;
-        }
-    }
-</style>
+                    #password {
+                        margin-left: 2px;
+                        margin-right: 11px;
+                    }
+                }
+            </style>
 
-            <input type="submit" class="btn-primary" style="margin-top: 10px; font-family: PixelFont, sans-serif;" value="Влез">
+            <input type="submit" class="btn-primary" style="margin-top: 10px; font-family: PixelFont, sans-serif;"
+                   value="Влез">
 
             <div class="text-muted" style="margin-top: 15px; margin-bottom: 0px;">
-                <a href="/user/forgot-password" style="font-family: Ariel, sans-serif; color: #fff8f8">Забравена парола?</a>
+                <a href="/user/forgot-password" style="font-family: Ariel, sans-serif; color: #fff8f8">Забравена
+                    парола?</a>
             </div>
         </form>
     </div>
@@ -242,76 +230,79 @@
         <h2>Регистрация</h2>
         <form th:action="@{/user/submit}" method="post" th:object="${user}" onsubmit="return validatePasswords();">
             <label class="form-label" for="email">Имейл</label>
-            <input class="form-control" type="email" id="Enteremail" name="email" placeholder="Въведете имейл" required >
+            <input class="form-control" type="email" id="Enteremail" name="email" placeholder="Въведете имейл" required>
             <div th:if="${emailAlreadyExists}"
                  class="text-danger" style="margin-top: 15px;" th:text="${emailAlreadyExists}"></div>
             <label class="form-label" for="name">Име</label>
             <input class="form-control" type="name" id="name" name="firstname" placeholder="Въведете име" required>
             <label class="form-label" for="surname">Фамилия</label>
-            <input class="form-control" type="name" id="surname" name="lastname" placeholder="Въведете фамилия" required>
+            <input class="form-control" type="name" id="surname" name="lastname" placeholder="Въведете фамилия"
+                   required>
             <label class="form-label" for="username">Потребителско име</label>
-            <input class="form-control" type="username" id="username" name="username" placeholder="Въведете потребителско име" required>
-                <label class="form-label" for="password">Парола</label>
-                <div style="position: relative; width: 100%; max-width: 448px;">
-                    <input class="form-control"
-                           type="password"
-                           id="Enterpass"
-                           name="password"
-                           placeholder="Въведете парола"
-                           required
-                           style="padding-right: 10px; width: 100%;" />
-                    <img id="togglePassword1"
-                         src="/images/eye-close-svgrepo-com.svg"
-                         alt="Toggle Password Visibility"
-                         style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;" />
-                </div>
+            <input class="form-control" type="username" id="username" name="username"
+                   placeholder="Въведете потребителско име" required>
+            <label class="form-label" for="password">Парола</label>
+            <div style="position: relative; width: 100%; max-width: 448px;">
+                <input class="form-control"
+                       type="password"
+                       id="Enterpass"
+                       name="password"
+                       placeholder="Въведете парола"
+                       required
+                       style="padding-right: 10px; width: 100%;"/>
+                <img id="togglePassword1"
+                     src="/images/eye-close-svgrepo-com.svg"
+                     alt="Toggle Password Visibility"
+                     style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;"/>
+            </div>
 
-                <label class="form-label" for="password">Въведете повторно паролата:</label>
-                <div style="position: relative; width: 100%; max-width: 448px;">
-                    <input class="form-control"
-                           type="password"
-                           id="Checkpass"
-                           placeholder="Въведете повторна парола"
-                           required
-                           style="padding-right: 10px; width: 100%;" />
-                    <img id="togglePassword2"
-                         src="/images/eye-close-svgrepo-com.svg"
-                         alt="Toggle Password Visibility"
-                         style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;" />
-                </div>
-                <span id="error-message"style="color: #bf003c; font-weight: bold; display: block; margin-top: 5px; font-family: Ariel, sans-serif;"> </span>
-                <input type="submit" class="btn-primary" style="font-family: PixelFont, sans-serif;" value="Регистрирай се">
-            </form>
+            <label class="form-label" for="password">Въведете повторно паролата:</label>
+            <div style="position: relative; width: 100%; max-width: 448px;">
+                <input class="form-control"
+                       type="password"
+                       id="Checkpass"
+                       placeholder="Въведете повторна парола"
+                       required
+                       style="padding-right: 10px; width: 100%;"/>
+                <img id="togglePassword2"
+                     src="/images/eye-close-svgrepo-com.svg"
+                     alt="Toggle Password Visibility"
+                     style="position: absolute; top: 50%; right: 10px; transform: translateY(-75%); cursor: pointer; height:30px; width: 30px;"/>
+            </div>
+            <span id="error-message"
+                  style="color: #bf003c; font-weight: bold; display: block; margin-top: 5px; font-family: Ariel, sans-serif;"> </span>
+            <input type="submit" class="btn-primary" style="font-family: PixelFont, sans-serif;" value="Регистрирай се">
+        </form>
 
-            <style>
-    /* Default styling for both */
-    .form-control {
-        width: 100%;
-        padding-right: 10px;
-        box-sizing: border-box;
-    }
+        <style>
+            /* Default styling for both */
+            .form-control {
+                width: 100%;
+                padding-right: 10px;
+                box-sizing: border-box;
+            }
 
-    /* For Web */
-    @media (min-width: 480px) {
-        .form-control {
-            margin-left: 3px;
-            margin-right: 11px;
-        }
-    }
+            /* For Web */
+            @media (min-width: 480px) {
+                .form-control {
+                    margin-left: 3px;
+                    margin-right: 11px;
+                }
+            }
 
-    /* For mobile screens */
-    @media (max-width: 480px) {
-        .form-control {
-            max-width: 100%;
-            padding-right: 35px;
-            font-size: 14px;
-        }
+            /* For mobile screens */
+            @media (max-width: 480px) {
+                .form-control {
+                    max-width: 100%;
+                    padding-right: 35px;
+                    font-size: 14px;
+                }
 
-        #togglePassword1, #togglePassword2 {
-            width: 18px;
-        }
-    }
-</style>
+                #togglePassword1, #togglePassword2 {
+                    width: 18px;
+                }
+            }
+        </style>
     </div>
 
 </div>
@@ -355,6 +346,28 @@
             document.title = "Sign Up";
         }
     }
+
+    function toggleFormOnLoad(showSignup) {
+        var loginForm = document.querySelector('.login');
+        var signupForm = document.querySelector('.signup');
+        var toggleBtn = document.querySelector('.toggle-btn');
+        var body = document.body;
+
+        if (showSignup) {
+            loginForm.style.display = "none"; // Hide login form
+            signupForm.style.display = "block"; // Show signup form
+            toggleBtn.textContent = "Влез в акаунт"; // Change toggle button text
+            body.classList.add('show-signup'); // Adjust page layout
+            document.title = "Sign Up"; // Update title
+        } else {
+            loginForm.style.display = "block"; // Show login form
+            signupForm.style.display = "none"; // Hide signup form
+            toggleBtn.textContent = "Регистрирай се"; // Change toggle button text
+            body.classList.remove('show-signup'); // Adjust page layout
+            document.title = "Login"; // Update title
+        }
+    }
+
 
      //Password check
     function validatePasswords() {

@@ -60,6 +60,7 @@ public class UserController {
         } catch (Exception ex) {
             model.addAttribute("user", user);
             model.addAttribute("emailAlreadyExists", "Потребител с този имейл вече съществува!");
+            model.addAttribute("showRegistrationForm", true);
             return new ModelAndView("login");
         }
         return new ModelAndView("redirect:/login");

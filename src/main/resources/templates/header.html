@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/myStyle.css">
+    <link rel="stylesheet" href="/css/header.css">
+
+</head>
+<body>
+
+<header>
+
+
+    <img src="/images/logoDigiMath.png" alt="Logo" width="100px" height="100px">
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <nav id="headerNav">
+        <div class="centered-links">
+            <a href="/math">Полезно</a>
+
+            <!-- Dropdown Menu -->
+            <div class="dropdown">
+                <a class="dropbtn">Дигитални решения ▼</a>
+                <div class="dropdown-content">
+                    <a href="/polinom/form">Полином</a>
+                    <a href="/pascal/form">Уравнение с Паскал</a>
+                </div>
+            </div>
+
+            <a href="/contact">Игри</a>
+            <a href="/us">За нас</a>
+        </div>
+
+        <div class="right-nav">
+            <a th:if="${session.sessionToken == null}" href="/login">Влез</a>
+            <a th:if="${session.sessionToken != null}" href="/logout">Излез</a>
+            <a th:if="${session.sessionToken != null}" href="/user/profile">Профил</a>
+        </div>
+    </nav>
+</header>
+
+<script>
+    function toggleMenu() {
+      document.getElementById("headerNav").classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>

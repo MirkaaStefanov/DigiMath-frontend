@@ -4,39 +4,16 @@
     <meta charset="UTF-8">
     <title>HOME</title>
 </head>
+
 <body>
+<header th:insert="~{header}"></header>
 
-<th:block th:if="${session.sessionToken == null}">
-    <li class="sidebar-item">
-        <a id="nav-login" class="sidebar-link" href="/login">
-            <i class="fas fa-registered align-middle"></i> <span class="align-middle">Впиши се</span>
-        </a>
-    </li>
-</th:block>
-<th:block th:if="${session.sessionToken != null}">
-    <li class="sidebar-item">
-        <a id="nav-logout" class="sidebar-link" href="/logout">
-            <i class="fas fa-sign-out-alt"></i> <span class="align-middle">Излез</span>
-        </a>
-    </li>
-    <li class="sidebar-item">
-        <a id="profile" class="sidebar-link" href="/user/profile">
-            <i class="fas fa-user-tie"></i> <span class="align-middle">Профил</span>
-        </a>
-    </li>
-</th:block>
+<div>
+    <h1>HELLO</h1>
+    <h1>I AM</h1>
+    <h1>DIGI MATH</h1>
 
-<li class="sidebar-item">
-    <a class="sidebar-link" href="/polinom/form">
-        <i class="fas fa-registered align-middle"></i> <span class="align-middle">Полином</span>
-    </a>
-</li>
-<li class="sidebar-item">
-    <a class="sidebar-link" href="/pascal/form">
-        <i class="fas fa-registered align-middle"></i> <span class="align-middle">Уравнение с Паскал</span>
-    </a>
-</li>
-<h1>Hello</h1>
+</div>
 
 </body>
 </html>
