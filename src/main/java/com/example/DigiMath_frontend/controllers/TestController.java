@@ -21,6 +21,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/test")
 public class TestController {
+
     private final TestClient testClient;
     private static final String SESSION_TOKEN = "sessionToken";
     private static final String ERRORTXT = "error";
@@ -45,7 +46,8 @@ public class TestController {
     @PostMapping("/submit")
     public ModelAndView submitTest(@ModelAttribute(name = "testDTO") TestDTO testDTO, HttpServletRequest request) {
         String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
-        testClient.createTest(testDTO, token);
-        return new ModelAndView("redirect:/test/all-tests");
+        TestDTO test = testClient.createTest(testDTO, token);
+        return new ModelAndView("redirect:/question/addQuestionA/"+test.getId());
     }
+
 }
