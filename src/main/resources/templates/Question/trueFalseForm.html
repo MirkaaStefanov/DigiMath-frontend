@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>True/False Question Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .answer-option {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Add True/False Question</h2>
+    <form action="#" th:action="@{/question/submit}" th:object="${theDTO}" method="post">
+
+        <!-- Question Text -->
+        <div class="mb-3">
+            <label for="questionText" class="form-label">Question:</label>
+            <input type="text" id="questionText" class="form-control" th:field="*{question.text}" required>
+            <input type="hidden" th:field="*{question.questionType}">
+        </div>
+
+        <!-- Hidden Test ID -->
+        <input type="hidden" th:field="*{testId}"/>
+
+        <!-- Answers -->
+        <h4>Answers:</h4>
+
+        <!-- Вярно (True) -->
+        <div class="answer-option">
+            <label>
+                <input type="radio" name="correctAnswer" value="0" onchange="setCorrectAnswer(0)">
+                Вярно
+            </label>
+            <input type="hidden" th:field="*{answers[0].text}" value="Вярно">
+            <input type="hidden" th:field="*{answers[0].correct}" id="correctAnswer0">
+        </div>
+
+        <!-- Грешно (False) -->
+        <div class="answer-option">
+            <label>
+                <input type="radio" name="correctAnswer" value="1" onchange="setCorrectAnswer(1)">
+                Грешно
+            </label>
+            <input type="hidden" th:field="*{answers[1].text}" value="Грешно">
+            <input type="hidden" th:field="*{answers[1].correct}" id="correctAnswer1">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    function setCorrectAnswer(index) {
+        // Reset all correct fields to false
+        document.getElementById('correctAnswer0').value = false;
+        document.getElementById('correctAnswer1').value = false;
+
+        // Set the selected answer to true
+        document.getElementById(`correctAnswer${index}`).value = true;
+    }
+</script>
+</body>
+</html>

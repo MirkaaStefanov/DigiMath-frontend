@@ -34,7 +34,7 @@ public class QuestionController {
     private static final String SESSION_TOKEN = "sessionToken";
 
     @GetMapping("/addQuestionA/{testId}")
-    public String addQuestion(@PathVariable Long testId, Model model, HttpServletRequest request) {
+    public String addQuestionABCD(@PathVariable Long testId, Model model, HttpServletRequest request) {
         String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
         QuestionAddHelperDTO theDTO = new QuestionAddHelperDTO();
 
@@ -53,6 +53,31 @@ public class QuestionController {
         model.addAttribute("theDTO", theDTO);
         return "Question/abcdForm";
     }
+
+    @GetMapping("/addQuestionB/{testId}")
+    public String addQuestionTrueFalse(@PathVariable Long testId, Model model, HttpServletRequest request) {
+        String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
+        QuestionAddHelperDTO theDTO = new QuestionAddHelperDTO();
+
+        TestDTO testDTO = testClient.findById(testId, token);
+        theDTO.setTestId(testId);
+
+        QuestionDTO questionDTO = new QuestionDTO();
+        questionDTO.setQuestionType(QuestionType.TRUEFALSE);
+        theDTO.setQuestion(questionDTO);
+
+        AnswerDTO answerTrue = new AnswerDTO();
+        answerTrue.setText("Вярно");
+        AnswerDTO answerFalse = new AnswerDTO();
+        answerFalse.setText("Грешно");
+
+        theDTO.getAnswers().add(answerTrue);
+        theDTO.getAnswers().add(answerFalse);
+
+        model.addAttribute("theDTO", theDTO);
+        return "Question/trueFalseForm";
+    }
+
 
     @PostMapping("/submit")
     public String submitQuestion(@ModelAttribute QuestionAddHelperDTO theDTO, Model model, HttpServletRequest request) {
