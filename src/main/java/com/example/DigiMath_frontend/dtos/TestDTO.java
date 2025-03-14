@@ -15,5 +15,4 @@ public class TestDTO {
 
     private String title;
 
-    private List<QuestionDTO> questions;
 }
