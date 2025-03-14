@@ -43,7 +43,6 @@ public class QuestionController {
 
         QuestionDTO questionDTO = new QuestionDTO();
         questionDTO.setQuestionType(QuestionType.ABCD);
-        questionDTO.setTest(testDTO);
         theDTO.setQuestion(questionDTO);
 
         for (int i = 0; i < 4; i++) {
@@ -77,6 +76,26 @@ public class QuestionController {
         model.addAttribute("theDTO", theDTO);
         return "Question/trueFalseForm";
     }
+
+    @GetMapping("/addQuestionC/{testId}")
+    public String addQuestionOpenAnswer(@PathVariable Long testId, Model model, HttpServletRequest request) {
+        String token = (String) request.getSession().getAttribute(SESSION_TOKEN);
+        QuestionAddHelperDTO theDTO = new QuestionAddHelperDTO();
+
+        TestDTO testDTO = testClient.findById(testId, token);
+        theDTO.setTestId(testId);
+
+        QuestionDTO questionDTO = new QuestionDTO();
+        questionDTO.setQuestionType(QuestionType.OPEN);
+        theDTO.setQuestion(questionDTO);
+
+        theDTO.getAnswers().add(new AnswerDTO());
+
+
+        model.addAttribute("theDTO", theDTO);
+        return "Question/openForm";
+    }
+
 
 
     @PostMapping("/submit")
