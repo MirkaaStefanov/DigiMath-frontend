@@ -5,10 +5,8 @@ import com.example.DigiMath_frontend.dtos.AuthenticationResponse;
 import com.example.DigiMath_frontend.dtos.RefreshTokenBodyDTO;
 import com.example.DigiMath_frontend.dtos.RegisterRequest;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -26,4 +24,11 @@ public interface AuthenticationClient {
 
     @GetMapping("/logout")
     void logout(@RequestHeader("Authorization") String auth);
+
+    @PostMapping("/forgot-password")
+        // Sends link to email so the user can change their password
+    ResponseEntity<String> forgotPassword(@RequestParam("email") String email);
+
+    @PostMapping("/password-reset")
+    ResponseEntity<String> resetPassword(@RequestParam("token") String token, @RequestParam("newPassword") String newPassword);
 }

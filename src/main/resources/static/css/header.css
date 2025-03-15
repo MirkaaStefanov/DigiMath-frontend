@@ -15,7 +15,7 @@ header {
 }
 
 body {
-    padding-top: 100px; /* Adjust based on header height */
+    padding-top: 10px; /* Adjust based on header height */
 }
 
 header img {
