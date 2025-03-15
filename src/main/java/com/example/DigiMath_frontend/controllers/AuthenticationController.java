@@ -5,6 +5,7 @@ import com.example.DigiMath_frontend.clients.AuthenticationClient;
 import com.example.DigiMath_frontend.clients.UserClient;
 import com.example.DigiMath_frontend.dtos.AuthenticationRequest;
 import com.example.DigiMath_frontend.dtos.AuthenticationResponse;
+import com.example.DigiMath_frontend.dtos.RegisterRequest;
 import com.example.DigiMath_frontend.dtos.UserDTO;
 import com.example.DigiMath_frontend.models.User;
 import com.example.DigiMath_frontend.session.SessionManager;
@@ -27,6 +28,24 @@ public class AuthenticationController {
     private static final String REDIRECTTXT = "redirect:/";
     private final UserClient userClient;
 
+
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("registerRequest", new RegisterRequest());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(RegisterRequest request, Model model, HttpServletRequest httpServletRequest) {
+        try {
+            AuthenticationResponse authenticationResponse = authenticationClient.register(request);
+            sessionManager.setSessionToken(httpServletRequest, authenticationResponse.getAccessToken(), authenticationResponse.getUser().getRole().toString());
+            return "redirect:/login";
+        } catch (Exception e) {
+            model.addAttribute("error", "Потребител с този имейл вече съществева!");
+            return "register";
+        }
+    }
 
     @GetMapping("/login")
     public String login(Model model, AuthenticationRequest authenticationRequest) {
