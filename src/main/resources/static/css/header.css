@@ -53,8 +53,9 @@ header .centered-links {
 header .right-nav {
     display: flex;
     gap: 15px;
-    margin-left: auto; /* Aligns the links to the right */
+    margin-left: auto;
     justify-content: flex-end;
+
 }
 
 header nav a {
@@ -80,6 +81,9 @@ header .right-nav a:hover {
     color: #29abe2;
 }
 
+.enter{
+    margin: 0px;
+}
 /* Dropdown Menu */
 .dropdown {
     position: relative;
@@ -136,11 +140,9 @@ header .right-nav a:hover {
 
 /* Mobile */
 @media (max-width: 600px) {
-    /* Show hamburger icon on mobile */
     header .hamburger {
         display: block;
     }
-
 
     header nav {
         display: none;
@@ -153,45 +155,63 @@ header .right-nav a:hover {
         padding: 10px;
         border-radius: 5px;
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        align-items: flex-start;
+        font-size: 16px !important; /* Ensure font size is applied */
     }
-
 
     header nav.active {
         display: flex;
     }
 
     header nav a {
-        font-size: 16px;
+        font-size: 16px !important; /* Force font size to 16px */
         padding: 10px;
         width: 100%;
         text-align: left;
+        margin-left: 0;
+    }
+
+    .drop-btn {
+        display: flex;
+        justify-content: flex-start;
+        text-align: left;
+        width: 100%;
+        font-size: 16px !important;
     }
 
     header .centered-links {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         margin: 0;
         position: unset;
         transform: unset;
-        text-align: center;
+        text-align: left;
+        font-size: 16px !important;
     }
 
-    header .right-nav {
+    .right-nav {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        font-size: 16px !important; /* Make sure the font size is 16px */
+    }
+
+    .enter{
             display: flex;
-            gap: 15px;
-            justify-content: flex-end;
+            justify-content: flex-start;
             width: 100%;
-            padding: 10px 20px;
-        }
+            font-size: 16px !important;
+    }
 }
+
 
 /* Desktop */
 @media (min-width: 601px) {
 
       header .right-nav {
             display: flex;
-            gap: 15px;
+            gap: 1px;
             justify-content: flex-end;
             margin-left: auto;
         }
