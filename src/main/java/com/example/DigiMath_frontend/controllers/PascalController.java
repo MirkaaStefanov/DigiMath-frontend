@@ -25,6 +25,7 @@ public class PascalController {
         model.addAttribute("pascal",new PascalDTO());
         return "Pascal/form";
     }
+
     @PostMapping("/submit")
     public String savePascal(@ModelAttribute PascalDTO pascalDTO){
         PascalDTO pascal = pascalClient.savePascal(pascalDTO);
