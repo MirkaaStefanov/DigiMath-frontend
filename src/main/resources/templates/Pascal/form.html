@@ -153,17 +153,17 @@
     <form action="#" method="post" th:action="@{/pascal/submit}" th:object="${pascal}">
         <div>
             <label class="form-label" for="first">First:</label>
-            <input class="form-control" id="first" th:field="*{first}" type="text"/>
+            <input class="form-control" id="first" th:field="*{first}" type="text" required/>
         </div>
 
         <div>
             <label class="form-label" for="second">Second:</label>
-            <input class="form-control" id="second" th:field="*{second}" type="text"/>
+            <input class="form-control" id="second" th:field="*{second}" type="text" required/>
         </div>
 
         <div>
             <label class="form-label" for="coefficient">Coefficient:</label>
-            <input class="form-control" id="coefficient" th:field="*{coefficient}" type="number"/>
+            <input class="form-control" id="coefficient" th:field="*{coefficient}" type="number" required/>
         </div>
 
         <div>
